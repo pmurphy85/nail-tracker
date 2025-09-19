@@ -1,45 +1,43 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * NailTracker - Nail Biting Habit Tracker
+ * A comprehensive app for tracking nail biting habits and progress
  *
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import React, {useEffect} from 'react';
+import {StatusBar, useColorScheme} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import 'react-native-gesture-handler';
+
+import AppNavigator from '@navigation/AppNavigator';
+import NotificationService from '@services/NotificationService';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
+  useEffect(() => {
+    const initializeApp = async () => {
+      try {
+        await NotificationService.initialize();
+        await NotificationService.requestPermissions();
+      } catch (error) {
+        console.error('Error initializing app:', error);
+      }
+    };
+
+    initializeApp();
+  }, []);
+
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor="#6366f1"
+      />
+      <AppNavigator />
     </SafeAreaProvider>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
