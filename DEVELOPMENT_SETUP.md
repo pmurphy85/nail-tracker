@@ -2,6 +2,10 @@
 
 This guide will help you set up the NailTracker development environment on multiple computers.
 
+> **📍 Current Status:** Phase 2 - Environment Setup & Testing
+> **Next Goal:** Get the app running on Android devices
+> **📋 For full context, see:** [CURRENT_STATUS.md](CURRENT_STATUS.md)
+
 ## 📋 Quick Setup Checklist
 
 ### **One-Time Setup (Per Computer):**
