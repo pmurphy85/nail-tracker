@@ -37,6 +37,7 @@ class NotificationService {
       },
       popInitialNotification: true,
       requestPermissions: true,
+      senderID: 'local-notifications-only', // Disable Firebase
     });
   }
 
